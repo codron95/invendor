@@ -1,0 +1,107 @@
+.font{
+    color:rgb(200,200,200);
+    font-family: 'PT Sans Narrow', sans-serif;
+}
+
+.font{
+    font-family: 'PT Sans Narrow', sans-serif;
+}
+
+.font-md{
+    font-size:22px;
+}
+
+.font-xsm{
+    font-size:16px;
+}
+
+.font-sm{
+    font-size:18px;
+}
+
+.font-lg{
+    font-size:26px;
+}
+
+.font-xg{
+    font-size:36px;
+}
+
+.font-smd{
+    font-size:20px;
+}
+
+.font-xxg{
+    font-size:50px;
+}
+
+.font-white{
+    color:white;
+}
+
+.font-black{
+    color:rgb(20,20,20);
+}
+
+.font-dark-blue{
+    color:#337AB7;
+}
+
+.font-blue{
+    color:#2DA0D8;
+}
+
+.welcome{
+    padding:50px 20%;
+}
+
+.sleek{
+    padding:15px 20%;
+}
+
+.text-custom{
+    width:40%;
+    display:inline;
+}
+
+.section-headings{
+    color:rgb(20,20,20);
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-weight:800;
+}
+
+.section-headings-white{
+    color:white;
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-weight:800;
+}
+
+.section-headings-gray{
+    color:rgb(200,200,200);
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-weight:800;
+}
+
+.section-headings-black{
+    color:black;
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-weight:800;
+}
+
+
+.bold{
+    font-weight:800;
+}
+
+.text-justify{
+    text-align:justify;
+}
+
+@media only screen and (max-width : 600px){
+    .sleek{
+        padding :15px 0px;
+    }
+    .sleek-padded {
+        padding: 50px 0%;
+    }
+}

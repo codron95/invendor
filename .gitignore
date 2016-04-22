@@ -1,0 +1,8 @@
+*.pyc
+__pycache__
+db.sqlite3
+.DS_Store
+/media
+requirements.txt
+/.ebextensions
+/website_invendor_env
