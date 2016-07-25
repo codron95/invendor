@@ -217,3 +217,12 @@ body{
     display:inline-block;
     margin-top:10px;
 }
+
+.four{
+    width:100%;
+    height:40px;
+    position:absolute;
+    top:50%;
+    text-align:center;
+    margin-top:-20px;
+}

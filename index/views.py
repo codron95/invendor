@@ -18,6 +18,9 @@ def subscribe(request):
 def index(request):
 	return render(request,"index.html")
 
+def four(request):
+	return render(request,"404.html")
+
 
 
 @csrf_exempt

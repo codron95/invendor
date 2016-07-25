@@ -20,10 +20,14 @@ from django.conf.urls.static import static
 from django.views.decorators.csrf import csrf_exempt
 from . import settings
 from index import views
+from alpha import views as v
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index),
     url(r'^subscribe/$',views.subscribe),
     url(r'^query/$',views.query),
+    url(r'^404/$',views.four),
+    url(r'^status/$',v.status),
+    url(r'^set/$',v.set_status),
 ]
