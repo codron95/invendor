@@ -2,6 +2,7 @@
 __pycache__
 .DS_Store
 /media
+db.sqlite3
 requirements.txt
 /.ebextensions
 /website_invendor_env
