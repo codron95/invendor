@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invendor</title>
     <link rel="stylesheet" href="{% static "css/base.css" %}" type="text/css">
     <link rel="shortcut icon" href="{% static "res/favicon.png"%}">
@@ -31,14 +32,15 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="javascript:void(0)">
-                <img class="img-responsive nav-logo pull-left" src="{% static "res/logo.png"%}"/>
+                <img class="img-responsive pull-left nav-logo" src="{% static "res/logo.png"%}"/>
             </a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right nav-shift-left nav-custom">
 
-                <li><a onclick="conditional_collapse()" href="#about">Home</a></li>
-                <li><a onclick="conditional_collapse()" href="#sphere">Sphere</a></li>
+                <li><a onclick="conditional_collapse()" href="#about">About</a></li>
+                <li><a onclick="conditional_collapse()" href="#demo">Demo</a></li>
+                <li><a onclick="conditional_collapse()" href="#team">Team</a></li>
                 <li><a onclick="conditional_collapse()" href="#contact">Contact</a></li>
 
             </ul>
@@ -46,41 +48,322 @@
     </div>
 </nav>
 
-<section id="about" class="about">
-    <div class="clear"></div>
-    <p class="center-align logo-main-container focus wow zoomIn"><img class="main-logo" src="{% static "res/logo.png"%}"></p>
-    <p class="center-align tagline-container focus"><span class="font font-lg font-black tagline wow zoomIn">Convention Overruled</span></p>
-    <span id="random" class="random font"></span>
-    <span id="random2" class="random font"></span>
-    <div class="subscribe-container focus wow zoomIn">
-        <p class="center-align"><span class="font font-md font-black">You dont want to miss when we fire up. So Why don't you just subscribe?</span></p>
-        <p id="subscribe" class="center-align wow zoomIn">
-            <input placeholder="Email Here" class="subscribe-text" type="text"/>
-            <span onclick="subscribe()" id="submit" class="btn btn-info subscribe-button font font-sm">Go.!</span>
-        </p>
-        <p class="center-align">
-            <img class="loader" src="{% static "res/spinner.gif"%}" id="loader"/>
-            <span id="message" class="font font-black font-sm"></span>
+<section id="intro" class="intro">
+    <video class="intro-video" autoplay loop>
+        <source src="{% static "res/intro.mp4"%}" type="video/mp4">
+    </video>
+
+    <div class="center-box center-align">
+        <img class="intro-logo" src="{% static "res/intro-logo.png"%}">
+        <p class="center-align foreground arrow-bottom intro-footer">
+            <a href="#about">
+                <span class="fa fa-angle-down font-white font-large arrow-animation shift-down"></span>
+            </a>
         </p>
     </div>
 </section>
 
 
-<section id="sphere" class="sphere">
-    <div class="clear"></div>
-    <p class="center-align logo-sphere-container focus wow zoomInDown"><img class="sphere-logo" src="{% static "res/sphere.png"%}"></p>
-    <p class="center-align tagline-container focus wow zoomIn">
-        <span class="font font-lg font-black catchphrase shift-down">
-            Sphere is coming to tip the balance in favor of life.
-        </span>
+<section id="about" class="about">
+    <p class="font font-lg section-headings-black center-align wow slideInUp">Features</p>
+    <div class="container about-container">
+        <!-- first row -->
+        <div class="row wow fadeIn about-row">
+            <div class="col-lg-4 col-md-4 padded-50 col-about center-align">
+                <img src="{% static "res/features/crash_resp.png" %}" class="img-about" />
+                <div class="about-content center-align">
+                    <p class="center-align">
+                        <span class="font font-green font-slg">Crash Response</span>
+                    </p>
+                    <p class="center-align">
+                        <span class="font font-black font-smd">
+                            Sphere Crash Response ensures help arrives in case of a collision and minimized delay
+                        </span>
+                    </p>
 
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 padded-50 col-about center-align">
+                <img src="{% static "res/features/theft_ctrl.png"%}" class="img-about" />
+                <div class="about-content center-align">
+                    <p class="center-align">
+                        <span class="font font-green font-slg">Anti-Theft</span>
+                    </p>
+                    <p class="center-align">
+                        <span class="font font-black font-smd">
+                            Sphere Anti-Theft System ensures the safety of your vehicle against
+                            theft and break-in
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-4 padded-50 col-about center-align">
+                <img src="{% static "res/features/onroad.png" %}" class="img-about" />
+                <div class="about-content center-align">
+                    <p class="center-align">
+                        <span class="font font-green font-slg">On-Road Assistance</span>
+                    </p>
+                    <p class="center-align">
+                        <span class="font font-black font-smd">
+                           Sphere On-Road assistance provides you help in case of trivial needs at the push of a button
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Anti-theft system starts here -->
+    <p class="font font-lg section-bg section-headings-white center-align shift-down">
+        Crash Response System
     </p>
-    <p class="center-align">
-        <span class="font font-md font-white shift-down wow zoomIn">
-            That is all we can talk about it right now. But let's just say, keep in touch.
+    <div class="container">
+        <p class="center-align process-gif-container">
+            <img class="process-gif" src="{% static "res/process.gif" %}">
+        </p>
+
+        <div class="row wow fadeIn">
+            <div class="col-lg-3 col-md-3 padded-50 col-about center-align">
+                <img src="{% static "res/features/auto_notify.png" %}" class="img-sub-cat" />
+                <div class="about-content center-align">
+                    <p class="center-align">
+                        <span class="font font-green font-smd">Automatic Emergency Request</span>
+                    </p>
+                    <p class="center-align">
+                        <span class="font font-black font-sm">
+                             Notifies nearest healthcare facilities instantly
+                        </span>
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 padded-50 col-about center-align">
+                <img src="{% static "res/features/min_delay.png" %}" class="img-sub-cat" />
+                <div class="about-content center-align">
+                    <p class="center-align">
+                        <span class="font font-green font-smd">Minimises Response Delay</span>
+                    </p>
+                    <p class="center-align">
+                        <span class="font font-black font-sm">
+                            Minimizes the time in which help arrives
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-3 padded-50 col-about center-align">
+                <img src="{% static "res/features/call_home.png" %}" class="img-sub-cat" />
+                <div class="about-content center-align">
+                    <p class="center-align">
+                        <span class="font font-green font-smd">Informs Loved Ones</span>
+                    </p>
+                    <p class="center-align">
+                        <span class="font font-black font-sm">
+                           Notifies your loved ones about the mishap
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 padded-50 col-about center-align">
+                <img src="{% static "res/features/rescue_track.png" %}" class="img-sub-cat" />
+                <div class="about-content center-align">
+                    <p class="center-align">
+                        <span class="font font-green font-smd">Allows Tracking</span>
+                    </p>
+                    <p class="center-align">
+                        <span class="font font-black font-sm">
+                           Allows your loved ones to track your whereabouts
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Crash Response Starts Here -->
+    <p class="font font-lg section-bg section-headings-white center-align shift-down">
+        Anti-Theft System
+    </p>
+
+    <div class="container container-features">
+        <div class="row wow fadeIn shift-down-60">
+            <div class="col-lg-3 col-md-3 padded-50 col-about center-align">
+                <img src="{% static "res/features/remote_ignit-02.png" %}" class="img-sub-cat" />
+                <div class="about-content center-align">
+                    <p class="center-align">
+                        <span class="font font-green font-smd">Remote Ignition Cut-Off</span>
+                    </p>
+                    <p class="center-align">
+                        <span class="font font-black font-sm">
+                             Sphere notifies nearest healthcare facilities instantly
+                        </span>
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 padded-50 col-about center-align">
+                <img src="{% static "res/features/tamp_notify.png" %}" class="img-sub-cat" />
+                <div class="about-content center-align">
+                    <p class="center-align">
+                        <span class="font font-green font-smd">Tamper Notification</span>
+                    </p>
+                    <p class="center-align">
+                            <span class="font font-black font-sm">
+                                Sphere minimizes the time in which help arrives
+                            </span>
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-3 padded-50 col-about center-align">
+                <img src="{% static "res/features/gps_track.png" %}" class="img-sub-cat" />
+                <div class="about-content center-align">
+                    <p class="center-align">
+                        <span class="font font-green font-smd">GPS Tracking</span>
+                    </p>
+                    <p class="center-align">
+                        <span class="font font-black font-sm">
+                           Sphere notifies your loved ones about the mishap
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 padded-50 col-about center-align">
+                <img src="{% static "res/features/remote_speed.png" %}" class="img-sub-cat" />
+                <div class="about-content center-align">
+                    <p class="center-align">
+                        <span class="font font-green font-smd">Remote Vehicle Slowdown</span>
+                    </p>
+                    <p class="center-align">
+                        <span class="font font-black font-sm">
+                           Sphere allows your loved ones to track your whereabouts
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- On-Road Assistance Starts Here -->
+    <p class="font font-lg section-bg section-headings-white center-align shift-down">
+        On-Road Assistance
+    </p>
+    <p class="onroadbg center-align">
+        <span class="font font-lg font-white">
+            On-road assistance provides you help in case of trivial needs at the push of a button.
+            Be it a flat tyre or you lost your way, on-road assistance comes to your rescue.
         </span>
     </p>
-    <p class="center-align"><span class="font font-md font-white"></span></p>
+
+</section>
+
+{% if url != "-1" %}
+<section class="demo" id="demo">
+    <div class="centered-container center-align">
+        <p class="font font-lg section-headings-white center-align wow slideInUp">Sphere In Action</p>
+        <iframe class="demo-video shift-down" src="{{url}}"
+                frameborder="0" allowfullscreen></iframe>
+    </div>
+</section>
+{% endif %}
+
+<section id="team" class="team">
+    <p class="font font-lg section-headings-white center-align wow slideInUp">Our Team</p>
+    <div class="container team-container">
+        <div class="row center-align team-row">
+            <a href="https://in.linkedin.com/in/shreymiglani" target="_blank">
+                <div class="col-lg-4 center-align team-cols">
+                    <div class="team-col-content center-align">
+                        <img src="{% static "res/team/shrey.jpg" %}" class="img-circle team-image"/>
+                        <p class="center-align team-content fat-line">
+                            <span class="font font-black font-smd">
+                                Shrey Miglani
+                            </span><br>
+                            <span class="font font-green font-smd">
+                                Operations & Product Management
+                            </span>
+                        </p>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </a>
+            <div class="col-lg-4 center-align team-cols">
+                <a href="https://in.linkedin.com/in/sharma-rohan" target="_blank">
+                    <div class="team-col-content center-align">
+                        <img src="{% static "res/team/rohan.jpg" %}" class="img-circle team-image"/>
+                        <p class="center-align team-content fat-line">
+                            <span class="font font-black font-smd">
+                                Rohan Sharma
+                            </span><br>
+                            <span class="font font-green font-smd">
+                                Team Leader & Developer
+                            </span>
+                        </p>
+                        <div class="clear"></div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 center-align team-cols">
+                <a href="http://www.linkedin.com/in/sanchitgupta95" target="_blank">
+                    <div class="team-col-content center-align">
+                        <img src="{% static "res/team/sanchit.jpg" %}" class="img-circle team-image"/>
+                        <p class="center-align team-content fat-line">
+                            <span class="font font-black font-smd">
+                                Sanchit Gupta
+                            </span><br>
+                            <span class="font font-green font-smd">
+                                Technical Leader
+                            </span>
+                        </p>
+                        <div class="clear"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row center-align team-row">
+            <div class="col-lg-4 col-lg-offset-2 center-align team-cols">
+                <a href="http://www.linkedin.com/in/sanchitgupta95" target="_blank">
+                    <div class="team-col-content center-align">
+                        <img src="{% static "res/team/astitva.jpg" %}" class="img-circle team-image"/>
+                        <p class="center-align team-content fat-line">
+                            <span class="font font-black font-smd">
+                                Astitva Pandey
+                            </span><br>
+                            <span class="font font-green font-smd">
+                                Graphic & Web Design
+                            </span>
+                        </p>
+                        <div class="clear"></div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 center-align team-cols">
+                <a href="http://www.linkedin.com/in/sanchitgupta95" target="_blank">
+                    <div class="team-col-content center-align">
+                        <img src="{% static "res/team/apoorva.jpg" %}" class="img-circle team-image"/>
+                        <p class="center-align team-content fat-line">
+                            <span class="font font-black font-smd">
+                                Apoorva Sharma
+                            </span><br>
+                            <span class="font font-green font-smd">
+                                Graphics & Web Design
+                            </span>
+                        </p>
+                        <div class="clear"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
 
 

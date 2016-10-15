@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import subscribers,queries
+from .models import subscribers,queries,demo
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
@@ -16,7 +16,10 @@ def subscribe(request):
 		return HttpResponse("You are awesome.!")
 
 def index(request):
-	return render(request,"index.html")
+	d = demo.objects.all()[0]
+	context = {}
+	context['url'] = d.url
+	return render(request,"index.html",context)
 
 def four(request):
 	return render(request,"404.html")

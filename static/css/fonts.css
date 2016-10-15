@@ -23,6 +23,10 @@
     font-size:26px;
 }
 
+.font-slg{
+    font-size:22px;
+}
+
 .font-xg{
     font-size:36px;
 }
@@ -33,6 +37,14 @@
 
 .font-xxg{
     font-size:50px;
+}
+
+.font-large{
+    font-size:48px;
+}
+
+.font-large-2{
+    font-size:52px;
 }
 
 .font-white{
@@ -49,6 +61,10 @@
 
 .font-blue{
     color:#2DA0D8;
+}
+
+.font-green{
+    color:#009688;
 }
 
 .welcome{
@@ -93,8 +109,23 @@
     font-weight:800;
 }
 
-.text-justify{
+.font-justify{
     text-align:justify;
+}
+
+.fat-line{
+    line-height:30px;
+}
+
+.section-thin-heads{
+    font-weight: 800;
+    color:#eeeeff;
+    font-size:120px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:1;
 }
 
 @media only screen and (max-width : 600px){

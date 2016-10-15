@@ -23,3 +23,9 @@ class expense(models.Model):
 	def __str__(self):
 		return self.created_date.strftime('%m-%d-%y')+'-----------'+self.amount
 
+class demo(models.Model):
+	url = models.CharField(max_length=255,default="-1")
+
+	def __str__(self):
+		return self.url
+

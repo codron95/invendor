@@ -14,6 +14,7 @@ body{
 #navmain{
     transition:all 0.3s linear;
     background-color:#ffffff;
+    transform:translateY(-60px);
 }
 
 .nav-shift-right{
@@ -58,14 +59,7 @@ body{
 
 .clear{
     overflow:hidden;
-}
-
-.about{
-    width:100%;
-    position:relative;
-    margin:0;
-    background-color:rgb(254,254,254);
-    overflow:hidden;
+    clear:both;
 }
 
 .center-align{
@@ -160,10 +154,27 @@ body{
     margin:0;
 }
 
+.about{
+    width:100%;
+    position:relative;
+    padding-top:50px;
+    padding-bottom:0;
+    margin:0;
+    background-color:#ffffff;
+}
+
+.centered-container{
+    position:absolute;
+    width:100%;
+    top:50%;
+    left:0;
+    transform:translateY(-50%);
+}
+
 .contactus-container{
     position:absolute;
     width:100%;
-    top:35%;
+    top:40%;
     left:0;
 }
 
@@ -176,10 +187,6 @@ body{
     color:#777 !important;
 }
 
-.textarea{
-    height:auto;
-}
-
 .btn-custom{
     width:30%;
 }
@@ -189,9 +196,6 @@ body{
     height:40px;
     padding:0 !important;
     margin:0 !important;
-}
-
-.logo-sphere-container{
 }
 
 .sphere-logo{
@@ -207,22 +211,260 @@ body{
 
 .catchphrase{
     padding:5px 0;
-    background-color:rgb(254,254,254);
-    color:#eee;
+    background-color:rgba(255,255,255,0.5);
     letter-spacing: 5px;
 
 }
 
 .shift-down{
-    display:inline-block;
     margin-top:10px;
 }
 
-.four{
-    width:100%;
-    height:40px;
+.shift-down-50{
+    margin-top:50px;
+}
+
+.shift-down-60{
+    margin-top:60px;
+}
+
+.team{
+    padding:50px 0;
+    background-color:#2E2E2E;
+}
+
+.team-container{
+    padding:50px 100px;
+}
+
+.team-row:nth-child(2){
+    margin-top:50px;
+}
+
+.team-cols{
+    padding:0 25px !important;
+}
+
+.team-col-content{
+    box-shadow:1px 1px 1px 1px #000;
+    padding:20px 20px;
+    background-color:#eeeeee;
+    position:relative;
+}
+
+.team-col-content:hover{
+    cursor:pointer;
+    transition:all 0.3s linear;
+}
+
+.team-image{
+    width:40%;
+    float:left;
+    display:block;
+}
+
+.team-content{
+    display:block;
     position:absolute;
     top:50%;
-    text-align:center;
-    margin-top:-20px;
+    right:0;
+    left:40%;
+    transform:translateY(-50%);
+}
+
+.intro-video{
+    min-width:100%;
+    min-height:100%;
+    width:auto;
+    height:auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.center-box{
+    width:100%;
+    height:auto;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+.intro-logo{
+    width:40%;
+}
+
+@keyframes arrow-about{
+    10%{
+        transform:translateY(0px);
+    }
+    20%{
+        transform:translateY(2px);
+    }
+    30%{
+        transform:translateY(4px);
+    }
+    40%{
+        transform:translateY(6px);
+    }
+    50%{
+        transform:translateY(8px);
+    }
+    60%{
+        transform:translateY(6px);
+    }
+    70%{
+        transform:translateY(4px);
+    }
+    80%{
+        transform:translateY(2px);
+    }
+    90%{
+        transform:translateY(0px);
+    }
+}
+
+.arrow-animation{
+    cursor:pointer;
+    animation-name:arrow-about;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+.img-about{
+    width:40%;
+}
+
+.col-about{
+    padding:10px 100px;
+}
+
+.about-container{
+    padding:50px !important;
+}
+
+.about-content{
+    padding:20px 25px;
+    width:100%;
+    height:auto;
+    max-height:200px;
+    min-height:150px;
+    overflow:hidden;
+}
+
+.about-content-major{
+    padding:20px 25px;
+    width:100%;
+}
+
+.section-bg{
+    background-color:#192B33;
+    padding:50px 0;
+    position:relative;
+}
+
+.process-gif-container{
+    margin-top:60px;
+}
+
+.process-gif{
+    width:50%;
+}
+
+.img-sub-cat{
+    width:30%;
+    z-index:999;
+}
+
+.container-features{
+    position:relative;
+}
+
+.demo{
+    background-color:#93CA3A;
+    position:relative;
+    padding:100px;
+}
+
+.contactus-video{
+    width:40%;
+}
+
+.demo-video{
+    width:50%;
+    height:300px;
+}
+
+.onroadbg{
+    background-image:url(../res/features/onroadbg.jpg);
+    background-size:cover;
+    background-repeat:no-repeat;
+    padding:60px 400px;
+}
+
+.icon-bar{
+    background-color:black !important;
+}
+
+.navbar-toggle:hover .icon-bar{
+    background-color:white !important;
+}
+
+
+@media screen and (max-width:600px){
+    .intro-video{
+        display:none;
+    }
+
+    .arrow-animation{
+        color:black !important;
+    }
+
+    .intro{
+        overflow:hidden;
+    }
+
+    .intro-logo{
+        width:80%;
+    }
+
+    .process-gif{
+        width:90%;
+    }
+
+    .demo-video{
+        width:80%;
+        height:200px;
+    }
+
+    .text{
+        width:80%;
+    }
+
+    .btn-custom{
+        width:80%;
+    }
+
+    .team-row:nth-child(2){
+        margin-top:0;
+    }
+
+    .team-cols{
+        margin-top:20px;
+    }
+
+    .crash-row{
+        margin-top:50px;
+    }
+
+    .onroadbg{
+        padding:10px 30px;
+    }
+
+    .nav-logo{
+        margin-left:10px !important;
+    }
+
 }

@@ -2,117 +2,52 @@
  * Created by Daemon on 4/18/2016.
  */
 
-words=['Focussed','Skilled','Determined','Started'];
-
 $(document).ready(function(){
-    $('.about').css('height',$(window).innerHeight());
-    $('.contact').css('height',$(window).innerHeight());
-    $('.sphere').css('height',$(window).innerHeight());
-
-    setInterval(function(){setslogan("random");},4000);
-    setInterval(function(){setslogan("random2");},3000);
+    $('.intro').css('height',$(window).height());
+    $('.contact').css('height',$(window).height());
+    $('.demo').css('height',$(window).height());
 
 
-   
+    $('#submit').click(function(){
+        $('#error').text('');
+        var name=$('#name').val();
+        var number=$('#number').val();
+        if(name=="" || number=="") {
+            $('#error').text('Please enter the details');
+            return;
+        }
+
+        $('#error').css('display','inline');
+        $.ajax({
+            type: "POST",
+            url: "php/subscribe.php",
+            data: {"name":name,"number":number},
+            success: function(result) {
+                $('#error').text(result);
+                console.log(result);
+                $('#loader').css('display','none');
+            },
+            failure: function(result){
+                $('#error').text(result);
+                console.log(result);
+                $('#loader').css('display','none');
+            }
+        });
+    });
 
 });
 
+$(window).resize(function(){
+    $('.intro').css('height',$(window).height());
+    $('.contact').css('height',$(window).height());
+    $('.demo').css('height',$(window).height());
+});
 
-
-function setslogan(e){
-    $("#"+e).fadeOut(300);
-    x=Math.floor((Math.random()*$(window).innerWidth()-100)+100);
-    y=Math.floor((Math.random()*$(window).innerHeight()-100)+100);
-    fontsize=Math.ceil((Math.random()*40)+10);
-    index=Math.floor(Math.random()*words.length);
-    setTimeout(function(){
-        $("#"+e).css('top',y);
-        $("#"+e).css('left',x);
-        $("#"+e).css('font-size',fontsize);
-        $("#"+e).text(words[index]);
-        $("#"+e).fadeIn(300);
-    },500);
-}
-
-function conditional_collapse(){
-    if($(window).innerWidth()<600) {
-        $('.navbar-toggle').click();
-        console.log($(window).innerWidth());
+$(window).scroll(function() {
+    if ($(window).scrollTop() > 600) {
+        $("#navmain").css("transform","translateY(0px)");
     }
-}
-
-
-function subscribe(){
-        email=$('.subscribe-text').val();
-        if(email=="")
-        {
-            $('#message').fadeIn(300);
-            $('#message').text('Email Please');
-            setTimeout(function(){ clear();},1000);
-            return;
-        }
-        $('#loader').fadeIn(300);
-        $.ajax({
-            url:"/subscribe/",
-            data:{email:email},
-            type:'post',
-            success:function(response){
-                $('#loader').hide();
-                $('#message').text(response);
-                $('#message').fadeIn(300);
-                setTimeout(function(){ clear();},3000);
-            },
-            failure:function(response){
-                $('#loader').hide();
-                $('#message').text('Oops.! Something went wrong.');
-                $('#message').fadeIn(300);
-                setTimeout(function(){ clear();},3000);
-            }
-
-        });
+    else{
+        $("#navmain").css("transform","translateY(-60px)");
     }
-
-    function clear(){
-        $('#message').fadeOut(300);
-        $('#message').text('');
-    }
-
-    function contact_clear(){
-        $('#contact-message').fadeOut(300);
-        $('#contact-message').text('');
-        $('#contact-name').val('');
-        $('#contact-email').val('');
-        $('#contact-query').val('');
-    }
-
-    function submit_query(){
-        name=$('#contact-name').val();
-        email=$('#contact-email').val();
-        query=$('#contact-query').val();
-        if(email=="" || name=="" || query=="")
-        {
-            $('#contact-message').fadeIn(300);
-            $('#contact-message').text('Something appears to be missing');
-            setTimeout(function(){ contact_clear();},1000);
-            return;
-        }
-        $('#contact-loader').fadeIn(300);
-        $.ajax({
-            url:"/query/",
-            data:{email:email,name:name,query:query},
-            type:'post',
-            success:function(response){
-                $('#contact-loader').hide();
-                $('#contact-message').text(response);
-                $('#contact-message').fadeIn(300);
-                setTimeout(function(){ contact_clear();},3000);
-            },
-            failure:function(response){
-                $('#contact-loader').hide();
-                $('#contact-message').text('Oops.! Something went wrong.');
-                $('#contact-message').fadeIn(300);
-                setTimeout(function(){ contact_clear();},3000);
-            }
-
-        });
-    }
+});
