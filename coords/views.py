@@ -6,12 +6,13 @@ from geopy.distance import great_circle
 import json
 from datetime import datetime
 from django.utils import timezone
+import urllib
 
 # Create your views here.
 @csrf_exempt
 def reg_request(req):
 	no = req.GET.get('no')
-	string = req.GET.get('string')
+	string = urllib.parse.unquote(req.GET.get('string'))
 
 	data = []
 
