@@ -15,7 +15,9 @@ def reg_request(req):
 
 	data = []
 
-	p1 = tuple(string.split(","))
+	slice1 = string.split("<")[1]
+	slice2 = slice1.split(">")[0]
+	p1 = tuple(slice2.split(","))
 
 	hospitals = hospital.objects.all()
 	for h in hospitals:
@@ -36,7 +38,7 @@ def reg_request(req):
 	cur_user = user.objects.filter(phone=no.strip())
 
 	cur_req = request()
-	cur_req.loc=string
+	cur_req.loc=",".join(p1)
 	cur_req.user = cur_user[0]
 	cur_req.save()
 	for i in range(3):
