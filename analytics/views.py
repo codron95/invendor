@@ -5,8 +5,6 @@ from urllib import parse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import math
-import numpy as np
-import requests
 
 # Create your views here.
 @csrf_exempt
@@ -26,7 +24,7 @@ def index(request):
 			speedList_analytics.append(speedList[i])
 	
 	for i in range(0,len(accxList)):
-		entry = tripAnalytics(accx=accxList[i],accy=accyList[i],gyroz=gyroxList[i],speed=speedList_analytics[i])
+		entry = tripAnalytics(accx=accxList[i],accy=accyList[i],gyroz=gyrozList[i],speed=speedList_analytics[i])
 		entry.save()
 
 	for i in range(0,len(latdList)):
