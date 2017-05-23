@@ -1,0 +1,127 @@
+html{
+    height:100%;
+
+}
+
+body{
+    padding:0;
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow-x:hidden;
+}
+
+.navbar{
+	margin-bottom:0;
+}
+
+.map-container{
+	padding:0;
+}
+
+.custom-brand{
+    display:block;
+    height:auto;
+}
+
+.logo-brand{
+    width:200px;
+}
+
+.map{
+	height:400px;
+}
+
+.highcharts-credits{
+	display:none;
+}
+
+.distance{
+	background-color:#E2E2E2;
+}
+
+.time{
+	background-color:#D0D0D0;
+}
+
+.center-align{
+	text-align:center;
+}
+
+.col-parameters{
+	padding:30px 10px;
+}
+
+#acc-graph-container{
+	padding-top:20px;
+}
+
+#speed-graph-container{
+	padding-top:20px;
+}
+
+.parameter-headings{
+	font-weight:600;
+	color:rgb(32,32,32);
+	font-size:20px;
+}
+
+.parameter-monikers{
+	width:120px;
+}
+
+.vcenter{
+	display:inline-block;
+	float:none;
+	vertical-align: middle;
+}
+
+.stat{
+	font-size:50px;
+	font-weight:700;
+}
+
+.distance-stat{
+	color:#FC8C30;
+}
+
+.time-stat{
+	color:#F60242;
+}
+
+.acc-stat{
+	color:#02B4A6;
+}
+
+.brake-stat{
+	color:#019702;
+}
+
+.sturn-stat{
+	color:#FE6600;
+}
+
+.stat-unit{
+	font-size:22px;
+	color:rgb(32,32,32);
+	font-weight:600;
+}
+
+.variance-stat{
+	color:#FC8C30;
+}
+
+.topspeed-stat{
+	color:#F60242;
+}
+
+.overspeeding-stat{
+	color:#02B4A6;
+}
+
+.footer{
+	background-color:#000000;
+	padding-top:10px;
+	height:40px;
+	color:white;
+}

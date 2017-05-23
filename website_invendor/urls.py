@@ -22,6 +22,7 @@ from . import settings
 from index import views
 from alpha import views as v
 from coords import views as coordviews
+from analytics import views as analytics_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -35,4 +36,8 @@ urlpatterns = [
     url(r'^auth/', coordviews.auth),
     url(r'^requests/', coordviews.get_requests),
     url(r'^set/', coordviews.set_status),
+    url(r'^record/', analytics_views.index),
+    url(r'^report/', analytics_views.report),
+    url(r'^dashboard/', analytics_views.dashboard),
+    url(r'^print/', analytics_views.acquire_data),
 ]

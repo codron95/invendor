@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'alpha',
     'corsheaders',
     'coords',
+    'analytics',
 ]
 
 MIDDLEWARE_CLASSES = [

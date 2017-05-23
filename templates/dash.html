@@ -1,0 +1,182 @@
+{% load staticfiles %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SphereAnalytics - home</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href='https://cdn.jsdelivr.net/animatecss/3.5.1/animate.min.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static "css/baseline.css" %}">
+    <link rel="stylesheet" href="{% static "css/font.css" %}">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="{%static "js/graph.js"%}"></script>
+    
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmVEv6ZS278G_McB5jz1TyfOnS9EAfArU&callback=initMap">
+    </script>
+
+    <script src="{% static "js/graph_render.js" %}"></script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand custom-brand" href="/dashboard">
+        <img src="{% static "logo.png" %}" class="logo-brand">
+      </a>
+    </div>
+    <ul class="nav navbar-nav">
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid map-container">
+    <div id="map" class="map"></div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6 col-parameters distance center-align">
+            <p class="center-align parameter-headings">Distance</p>
+            <div class="row">
+                <div class="col-lg-6 vcenter">
+                    <img class="parameter-monikers" src="{% static "dashicons/dist.png" %}">
+                </div><!--
+                --><div class="col-lg-6 vcenter">
+                    <p class="center-align">
+                        <span class="stat distance-stat"></span>
+                        <span class="stat-unit">Km</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 time col-parameters center-align">
+            <p class="center-align parameter-headings">Time</p>
+            <div class="row">
+                <div class="col-lg-6 vcenter">
+                    <img class="parameter-monikers" src="{% static "dashicons/time.png" %}">
+                </div><!--
+                --><div class="col-lg-6 vcenter">
+                    <p class="center-align">
+                        <span class="stat time-stat time-stat-min"></span>
+                        <span class="stat-unit">m</span>
+                        <span class="stat time-stat time-stat-sec"></span>
+                        <span class="stat-unit">s</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="acc-graph-container" class="container-fluid"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-parameters distance center-align">
+            <p class="center-align parameter-headings">Hard Acceleration</p>
+            <div class="row">
+                <div class="col-lg-6 vcenter">
+                    <img class="parameter-monikers" src="{% static "dashicons/hacc.png" %}">
+                </div><!--
+                --><div class="col-lg-6 vcenter">
+                    <p class="center-align">
+                        <span class="stat acc-stat"></span>
+                        <span class="stat-unit">cnt</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 time col-parameters center-align">
+            <p class="center-align parameter-headings">Hard Brakes</p>
+            <div class="row">
+                <div class="col-lg-6 vcenter">
+                    <img class="parameter-monikers" src="{% static "dashicons/hbrake.png" %}">
+                </div><!--
+                --><div class="col-lg-6 vcenter">
+                    <p class="center-align">
+                        <span class="stat brake-stat"></span>
+                        <span class="stat-unit">cnt</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-parameters distance center-align">
+            <p class="center-align parameter-headings">Sharp Turns</p>
+            <div class="row">
+                <div class="col-lg-6 vcenter">
+                    <img class="parameter-monikers" src="{% static "dashicons/sturn.png" %}">
+                </div><!--
+                --><div class="col-lg-6 vcenter">
+                    <p class="center-align">
+                        <span class="stat sturn-stat"></span>
+                        <span class="stat-unit">cnt</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="speed-graph-container" class="container-fluid"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-parameters distance center-align">
+            <p class="center-align parameter-headings">Variation</p>
+            <div class="row">
+                <div class="col-lg-6 vcenter">
+                    <img class="parameter-monikers" src="{% static "dashicons/vari.png" %}">
+                </div><!--
+                --><div class="col-lg-6 vcenter">
+                    <p class="center-align">
+                        <span class="stat variance-stat"></span>
+                        <span class="stat-unit"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 time col-parameters center-align">
+            <p class="center-align parameter-headings">Top Speed</p>
+            <div class="row">
+                <div class="col-lg-6 vcenter">
+                    <img class="parameter-monikers" src="{% static "dashicons/hacc.png" %}">
+                </div><!--
+                --><div class="col-lg-6 vcenter">
+                    <p class="center-align">
+                        <span class="stat topspeed-stat"></span>
+                        <span class="stat-unit">Km/h</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-parameters distance center-align">
+            <p class="center-align parameter-headings">Overspeeding</p>
+            <div class="row">
+                <div class="col-lg-6 vcenter">
+                    <img class="parameter-monikers" src="{% static "dashicons/over.png" %}">
+                </div><!--
+                --><div class="col-lg-6 vcenter">
+                    <p class="center-align">
+                        <span class="stat overspeeding-stat">0</span>
+                        <span class="stat-unit">cnt</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p class="center-align">
+        <span class="footer-text">© 2016 Invendor</span>
+    </p>
+</div>
+</body>
+</html>
