@@ -11,10 +11,8 @@ import urllib
 # Create your views here.
 @csrf_exempt
 def reg_request(req):
-	data = req.POST.get('data')
-	elements = data.split(";")
-	no = elements[0]
-	string = urllib.parse.unquote(data[1])
+	no = req.POST.get('no')
+	string = urllib.parse.unquote(req.POST.get('string'))
 
 	data = []
 
