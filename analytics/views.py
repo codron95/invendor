@@ -31,7 +31,7 @@ def index(request):
 		entry = tripGps(latd=latdList[i],longtd=longtdList[i])
 		entry.save()
 		
-	return HttpResponse("ok")
+	return HttpResponse("ok", content_type = 'text/plain')
 
 
 def report(request):
