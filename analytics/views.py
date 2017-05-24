@@ -4,7 +4,9 @@ from .models import tripGps,tripAnalytics
 from urllib import parse
 from django.views.decorators.csrf import csrf_exempt
 import json
+import requests
 import math
+import numpy as np
 
 # Create your views here.
 @csrf_exempt
@@ -35,9 +37,12 @@ def index(request):
 
 
 def report(request):
-	data = tripData.objects.all().order_by("-created_dt")
-	dataAsc = tripData.objects.all().order_by("created_dt")
-	discData = data[0::50]
+	dataAnalytics = tripAnalytics.objects.all().order_by("-created_dt")
+	dataAnalyticsAsc = tripAnalytics.objects.all().order_by("created_dt")
+	dataGps = tripGps.objects.all().order_by("-created_dt")
+	dataGpsAsc = tripGps.objects.all().order_by("-created_dt")
+
+	discData = dataAnalytics[0::50]
 
 	tripDistance = 0
 	tripTimehh = 0
@@ -58,11 +63,11 @@ def report(request):
 	yseriesspeed = []
 
 	#trip distance
-	for d in dataAsc:
+	for d in dataGpsAsc:
 		if(d.latd>0):
 			startCoord = str(d.latd)+","+str(d.longtd)
 			break
-	endCoord = str(data[0].latd)+","+str(data[0].longtd)
+	endCoord = str(dataGps[0].latd)+","+str(dataGps[0].longtd)
 	url = "https://maps.googleapis.com/maps/api/distancematrix/json?"
 	url += "origins="+startCoord+"&destinations="+endCoord+"&key=AIzaSyCmVEv6ZS278G_McB5jz1TyfOnS9EAfArU"
 	res = requests.get(url)
@@ -75,17 +80,16 @@ def report(request):
 	tripDistance = distObj["value"]/1000
 
 	#graph data
-	for d in dataAsc:
-		if(d.latd > 0):
-			xaxislabels.append(str(d.created_dt.replace(microsecond=0)).split("+")[0])
-			yseriesaccx.append(d.accx)
-			yseriesaccy.append(d.accy)
-			yseriesaccz.append(d.accz)
-			yseriesspeed.append(d.speed)
+	for d in dataAnalyticsAsc:
+		xaxislabels.append(str(d.created_dt.replace(microsecond=0)).split("+")[0])
+		yseriesaccx.append(d.accx)
+		yseriesaccy.append(d.accy)
+		yseriesaccz.append(d.gyroz)
+		yseriesspeed.append(d.speed)
 
 	#trip time
-	startTime = dataAsc[0].created_dt
-	endTime = data[0].created_dt
+	startTime = dataGpsAsc[0].created_dt
+	endTime = dataGps[0].created_dt
 	distTime = endTime.replace(microsecond=0) - startTime.replace(microsecond=0)
 	time = str(distTime)
 	time = time.split(":")
@@ -94,21 +98,21 @@ def report(request):
 	tripTimess = time[2]
 
 	#trip coords to plot path
-	for obj in discData:
+	'''for obj in discData:
 		if(obj.latd>0):
 			coord = {"lat":obj.latd,"lng":obj.longtd}
-			tripCoords.append(coord)
+			tripCoords.append(coord)'''
 
 	#calculate acceleration,braking and sharpturns
-	for i in range(1,len(data)):
-		speedList.append(data[i].speed)
-		if(data[i].accy>2 and data[i-1].accy<2):
+	for i in range(1,len(dataAnalytics)):
+		speedList.append(dataAnalytics[i].speed)
+		if(dataAnalytics[i].accy>2 and dataAnalytics[i-1].accy<2):
 			hardAcceleration += 1
 
-		if(math.fabs(data[i].accx)>1 and math.fabs(data[i-1].accx)<1):
+		if(math.fabs(dataAnalytics[i].gyroz)>1 and math.fabs(dataAnalytics[i-1].gyroz)<1):
 			sharpTurns += 1
 
-		if(data[i].accy<-2 and data[i-1].accy>-2):
+		if(dataAnalytics[i].accy<-2 and dataAnalytics[i-1].accy>-2):
 			hardBraking += 1
 	
 	#top speed calculation
@@ -122,7 +126,6 @@ def report(request):
 	"timehh":tripTimehh,
 	"timemm":tripTimemm,
 	"timess":tripTimess,
-	"coords":tripCoords,
 	"acceleration":hardAcceleration,
 	"braking":hardBraking,
 	"turns":sharpTurns,
@@ -145,6 +148,16 @@ def acquire_data(request):
 	for i in q:
 		data = data + str(i.accx)+"\t"+str(i.accy)+"\t"+str(i.gyroz)+"\t"+str(i.speed)+"<br>"
 	return HttpResponse(data)
+
+@csrf_exempt
+def fetch_pos(request):
+	q = tripGps.objects.all().order_by('-created_dt')
+	if(len(q)==0):
+		return HttpResponse("-1")
+	
+	latd = q[0].latd
+	longtd = q[0].longtd
+	return HttpResponse(str(latd)+","+str(longtd))
 
 def dashboard(request):
 	return render(request, "dash.html")

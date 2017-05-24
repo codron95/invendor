@@ -7,9 +7,6 @@ $(function(){
 		data:{csrfmiddlewaretoken:$("input[name='csrfmiddlewaretoken']").val()},
 		success:function(response){
 			tripData = response;
-			console.log(tripData.coords[0]);
-			map.panTo(tripData.coords[0])
-			drawPath(tripData);
 			initChart(tripData);
 			$(".distance-stat").text(tripData.distance);
 			$(".time-stat-min").text(tripData.timemm);
@@ -23,31 +20,39 @@ $(function(){
 		dataType:"json"
 	});
 });
-
+    
+var map,marker,i=0;
 function initMap() {
-	map = new google.maps.Map(document.getElementById('map'),{
-	zoom: 18,
-	scrollwheel:false,
-	center: {lat: 0, lng: -180},
-	mapTypeId: 'terrain'
-});
+    var uluru = {lat: -25.363, lng: 131.044};
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 17,
+      center: uluru
+    });
+    
+    marker = new google.maps.Marker({
+      position: uluru,
+      map: map
+    });
+
+    updateLocation(marker);
 }
 
-function drawPath(data){
-	var directionsService = new google.maps.DirectionsService;
-	var directionsDisplay = new google.maps.DirectionsRenderer;
+function updateLocation(marker){
+setInterval(fetch_data,1000,marker);
+}
 
-	directionsService.route({
-          origin: data.coords[0],
-          destination: data.coords[data.coords.length-1],
-          travelMode: google.maps.TravelMode["DRIVING"]
-        }, function(response, status) {
-          if (status == 'OK') {
-            directionsDisplay.setDirections(response);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
+function fetch_data(marker){
+	$.ajax({
+		url:"/track/",
+		type:"post",
+		contentType:"application/x-www-form-urlencoded",
+		success: function(response){
+			latlng = response.split(",");
+    console.log(response);
+    loc = new google.maps.LatLng(parseFloat(latlng[0]),parseFloat(latlng[1]));
+			marker.setPosition(loc);
+    map.panTo(loc)
 
-	directionsDisplay.setMap(map);
+		}
+	});
 }
