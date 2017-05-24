@@ -28,7 +28,7 @@ function initChart(tripData){
             name: 'accy',
             data: tripData.yseriesaccy
         }, {
-            name: 'accz',
+            name: 'gyroz',
             data: tripData.yseriesaccz
         }]
     });
