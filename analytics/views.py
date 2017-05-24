@@ -106,13 +106,13 @@ def report(request):
 	#calculate acceleration,braking and sharpturns
 	for i in range(1,len(dataAnalytics)):
 		speedList.append(dataAnalytics[i].speed)
-		if(dataAnalytics[i].accy>2 and dataAnalytics[i-1].accy<2):
+		if(dataAnalytics[i].accy>6000 and dataAnalytics[i-1].accy<2000):
 			hardAcceleration += 1
 
-		if(math.fabs(dataAnalytics[i].gyroz)>1 and math.fabs(dataAnalytics[i-1].gyroz)<1):
+		if(math.fabs(dataAnalytics[i].gyroz)>20000 and math.fabs(dataAnalytics[i-1].gyroz)<15000):
 			sharpTurns += 1
 
-		if(dataAnalytics[i].accy<-2 and dataAnalytics[i-1].accy>-2):
+		if(dataAnalytics[i].accy<-4000 and dataAnalytics[i-1].accy>-2000):
 			hardBraking += 1
 	
 	#top speed calculation
@@ -144,9 +144,11 @@ def acquire_data(request):
 	q = tripAnalytics.objects.all().order_by('-created_dt')
 	if(len(q)==0):
 		return HttpResponse("empty set")
-	data = ""
+	data = "<table>"
 	for i in q:
-		data = data + str(i.accx)+"\t"+str(i.accy)+"\t"+str(i.gyroz)+"\t"+str(i.speed)+"<br>"
+		data = data + "<tr>"
+		data = data + "<td>"+str(i.accx)+"</td><td>"+str(i.accy)+"</td><td>"+str(i.gyroz)+"</td><td>"+str(i.speed)+"</td>"
+		data = data + "</tr>"
 	return HttpResponse(data)
 
 @csrf_exempt
