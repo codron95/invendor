@@ -144,7 +144,7 @@ def acquire_data(request):
 	q = tripAnalytics.objects.all().order_by('-created_dt')
 	if(len(q)==0):
 		return HttpResponse("empty set")
-	data = "<table>"
+	data = '<table border="1">'
 	for i in q:
 		data = data + "<tr>"
 		data = data + "<td>"+str(i.accx)+"</td><td>"+str(i.accy)+"</td><td>"+str(i.gyroz)+"</td><td>"+str(i.speed)+"</td>"
