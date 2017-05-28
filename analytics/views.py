@@ -137,8 +137,8 @@ def acquire_data(request):
 
 @csrf_exempt
 def fetch_plot_data(request):
-	q = tripAnalytics.objects.all().order_by('-created_dt')
-	data = q[:80]
+	q = tripAnalytics.objects.all().order_by('created_dt')
+	data = q[-80:]
 
 	xaxislabels = []
 	yseriesaccy = []
