@@ -17,9 +17,8 @@ function initChart(tripData){
         chart:{
             events:{
                 load:function(){
-                    seriesaccx = this.series[0];
-                    seriesaccy = this.series[1];
-                    seriesaccz = this.series[2];
+                    seriesaccy = this.series[0];
+                    seriesaccz = this.series[1];
                     setInterval(function(){
                         $.ajax({
                             type:"POST",
@@ -27,7 +26,6 @@ function initChart(tripData){
                             success:function(response){
                                 tripData = response;
                                 console.log(tripData);
-                                seriesaccx = tripData.yseriesaccx;
                                 seriesaccy = tripData.yseriesaccy;
                                 seriesaccz = tripData.yseriesaccz;
                             },
@@ -58,9 +56,6 @@ function initChart(tripData){
             borderWidth: 0
         },
         series: [{
-            name: 'accx',
-            data: tripData.yseriesaccx
-        }, {
             name: 'accy',
             data: tripData.yseriesaccy
         }, {
