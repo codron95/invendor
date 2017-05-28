@@ -41,4 +41,5 @@ urlpatterns = [
     url(r'^dashboard/', analytics_views.dashboard),
     url(r'^print/', analytics_views.acquire_data),
     url(r'^track/', analytics_views.fetch_pos),
+    url(r'^fetchplots/', analytics_views.fetch_plot_data)
 ]

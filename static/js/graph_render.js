@@ -7,7 +7,6 @@ $(function(){
 		data:{csrfmiddlewaretoken:$("input[name='csrfmiddlewaretoken']").val()},
 		success:function(response){
 			tripData = response;
-			initChart(tripData);
 			$(".distance-stat").text(tripData.distance);
 			$(".time-stat-min").text(tripData.timemm);
 			$(".time-stat-sec").text(tripData.timess);

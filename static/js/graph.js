@@ -1,6 +1,44 @@
+$(function(){
+    $.ajax({
+                type:"POST",
+                url:"/fetchplots/",
+                success:function(response){
+                    tripData = response;
+                    console.log("Intializing charts with:"+tripData);
+                    initChart(tripData);
+                },
+                dataType:"json"
+        });
+});
+
 function initChart(tripData){
     //acceleration graphss
     Highcharts.chart('acc-graph-container', {
+        chart:{
+            events:{
+                load:function(){
+                    seriesaccx = this.series[0];
+                    seriesaccy = this.series[1];
+                    seriesaccz = this.series[2];
+                    i = 0;
+                    setInterval(function(){
+                        i += 20;
+                        $.ajax({
+                            type:"POST",
+                            url:"/fetchplots/",
+                            success:function(response){
+                                tripData = response;
+                                console.log(tripData);
+                                seriesaccx = tripData.yseriesaccx;
+                                seriesaccy = tripData.yseriesaccy;
+                                seriesaccz = tripData.yseriesaccz;
+                            },
+                            dataType:"json"
+                        });
+                    },1000);
+                }
+            }
+        },
         title: {
             text: 'Acceleration Graphs',
             x: -20 //center

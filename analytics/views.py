@@ -56,11 +56,6 @@ def report(request):
 	standardDeviation = 0
 	topSpeed = 0
 	speedList = []
-	xaxislabels = []
-	yseriesaccx = []
-	yseriesaccy = []
-	yseriesaccz = []
-	yseriesspeed = []
 
 	#trip distance
 	for d in dataGpsAsc:
@@ -79,13 +74,6 @@ def report(request):
 	distObj = elem[0]["distance"]
 	tripDistance = distObj["value"]/1000
 
-	#graph data
-	for d in dataAnalyticsAsc:
-		xaxislabels.append(str(d.created_dt.replace(microsecond=0)).split("+")[0])
-		yseriesaccx.append(d.accx)
-		yseriesaccy.append(d.accy)
-		yseriesaccz.append(d.gyroz)
-		yseriesspeed.append(d.speed)
 
 	#trip time
 	startTime = dataGpsAsc[0].created_dt
@@ -131,12 +119,8 @@ def report(request):
 	"turns":sharpTurns,
 	"variance":math.floor(variance),
 	"deviation":standardDeviation,
-	"topspeed":math.floor(topSpeed),
-	"xaxislabels":xaxislabels,
-	"yseriesaccx":yseriesaccx,
-	"yseriesaccy":yseriesaccy,
-	"yseriesaccz":yseriesaccz,
-	"yseriesspeed":yseriesspeed}
+	"topspeed":math.floor(topSpeed)
+	}
 
 	return HttpResponse(json.dumps(data))
 
@@ -150,6 +134,35 @@ def acquire_data(request):
 		data = data + "<td>"+str(i.accx)+"</td><td>"+str(i.accy)+"</td><td>"+str(i.gyroz)+"</td><td>"+str(i.speed)+"</td>"
 		data = data + "</tr>"
 	return HttpResponse(data)
+
+@csrf_exempt
+def fetch_plot_data(request):
+	q = tripAnalytics.objects.all().order_by('-created_dt')
+	data = q[:80]
+
+	xaxislabels = []
+	yseriesaccx = []
+	yseriesaccy = []
+	yseriesaccz = []
+	yseriesspeed = []
+	
+	#graph data
+	for d in data:
+		xaxislabels.append(str(d.created_dt.replace(microsecond=0)).split("+")[0])
+		yseriesaccx.append(d.accx)
+		yseriesaccy.append(d.accy)
+		yseriesaccz.append(d.gyroz)
+		yseriesspeed.append(d.speed)
+
+	responseData = {
+		"xaxislabels":xaxislabels,
+		"yseriesaccx":yseriesaccx,
+		"yseriesaccy":yseriesaccy,
+		"yseriesaccz":yseriesaccz,
+		"yseriesspeed":yseriesspeed
+	}
+
+	return HttpResponse(json.dumps(responseData))
 
 @csrf_exempt
 def fetch_pos(request):
