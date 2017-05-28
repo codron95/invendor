@@ -20,9 +20,7 @@ function initChart(tripData){
                     seriesaccx = this.series[0];
                     seriesaccy = this.series[1];
                     seriesaccz = this.series[2];
-                    i = 0;
                     setInterval(function(){
-                        i += 20;
                         $.ajax({
                             type:"POST",
                             url:"/fetchplots/",
@@ -74,6 +72,25 @@ function initChart(tripData){
 
     //speed graphs
     Highcharts.chart('speed-graph-container', {
+        chart:{
+            events:{
+                load:function(){
+                    seriesspeed = this.series[0];
+                    setInterval(function(){
+                        $.ajax({
+                            type:"POST",
+                            url:"/fetchplots/",
+                            success:function(response){
+                                tripData = response;
+                                console.log(tripData);
+                                seriesspeed = tripData.yseriesspeed;
+                            },
+                            dataType:"json"
+                        });
+                    },1000);
+                }
+            }
+        },
         title: {
             text: 'Speed',
             x: -20 //center
