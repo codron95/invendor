@@ -141,24 +141,21 @@ def fetch_plot_data(request):
 	data = q[:80]
 
 	xaxislabels = []
-	yseriesaccx = []
 	yseriesaccy = []
-	yseriesaccz = []
+	yseriesgyroz = []
 	yseriesspeed = []
 	
 	#graph data
 	for d in data:
 		xaxislabels.append(str(d.created_dt.replace(microsecond=0)).split("+")[0])
-		yseriesaccx.append(d.accx)
 		yseriesaccy.append(d.accy)
-		yseriesaccz.append(d.gyroz)
+		yseriesgyroz.append(d.gyroz)
 		yseriesspeed.append(d.speed)
 
 	responseData = {
 		"xaxislabels":xaxislabels,
-		"yseriesaccx":yseriesaccx,
 		"yseriesaccy":yseriesaccy,
-		"yseriesaccz":yseriesaccz,
+		"yseriesgyroz":yseriesgyroz,
 		"yseriesspeed":yseriesspeed
 	}
 
